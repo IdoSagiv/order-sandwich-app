@@ -1,6 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewNewOrderScreenTitle"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/orange_bg_rounded_corner"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:text="@string/new_order_screen_title"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Order details    -->
+    <LinearLayout
+        android:id="@+id/linearLayoutOrderDetailsInNewOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewOrderScreenTitle">
+
+        <!-- Customer name   -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewCustomerNameInNewOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextCustomerNameInNewOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter your name"
+                android:maxLines="1"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- num of pickles   -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewNumOfPicklesInNewOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pickles"
+                android:textSize="18sp" />
+
+            <com.google.android.material.slider.Slider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:valueFrom="0"
+                android:valueTo="10" />
+        </LinearLayout>
+
+        <!-- is hummus   -->
+        <CheckBox
+            android:id="@+id/checkBoxIsHummusInNewOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Add hummus"
+            android:textColor="#8A8A8A"
+            android:textSize="18sp" />
+
+        <!-- is tahini   -->
+        <CheckBox
+            android:id="@+id/checkBoxIsTahiniInNewOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Add tahini"
+            android:textColor="#8A8A8A"
+            android:textSize="18sp" />
+
+        <!-- Order comment   -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewOrderCommentInNewOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comments"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextOrderCommentInNewOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter comments"
+                android:maxLines="1"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Save order -->
+    <Button
+        android:id="@+id/buttonSaveOrderInNewOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Save"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutOrderDetailsInNewOrder" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

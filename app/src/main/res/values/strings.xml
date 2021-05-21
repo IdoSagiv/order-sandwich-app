@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">sandwich_stand</string>
+    <string name="app_name">sandwich stand</string>
+    <string name="new_order_screen_title">New order</string>
 </resources>
