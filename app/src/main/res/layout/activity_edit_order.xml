@@ -127,17 +127,37 @@
 
     </LinearLayout>
 
-    <!-- Place order    -->
-    <Button
-        android:id="@+id/buttonSaveOrderInEditOrder"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutOrderDetailsInEditOrder"
         android:layout_marginTop="40dp"
-        android:text="Save changes"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutOrderDetailsInEditOrder" />
+        android:orientation="vertical">
+        <!-- save changes    -->
+        <Button
+            android:id="@+id/buttonSaveOrderInEditOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Save changes"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- delete order    -->
+        <Button
+            android:id="@+id/buttonDeleteOrderInEditOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Delete order"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/buttonSaveOrderInEditOrder"
+            app:layout_constraintStart_toStartOf="@id/buttonSaveOrderInEditOrder" />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
