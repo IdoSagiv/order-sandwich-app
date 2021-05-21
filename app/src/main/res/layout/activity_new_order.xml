@@ -72,6 +72,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.slider.Slider
+                android:id="@+id/sliderNumOfPicklesInNewOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:stepSize="1"
@@ -126,9 +127,9 @@
 
     </LinearLayout>
 
-    <!-- Place order -->
+    <!-- Place order    -->
     <Button
-        android:id="@+id/buttonSaveOrderInNewOrder"
+        android:id="@+id/buttonPlaceOrderInNewOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
