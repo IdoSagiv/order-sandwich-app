@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "479846606281",
+    "project_id": "postpc-ex7-sandwich-stand",
+    "storage_bucket": "postpc-ex7-sandwich-stand.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479846606281:android:ce3e1fe25c4b3f8adb7418",
+        "android_client_info": {
+          "package_name": "idosa.huji.postpc.sandwich_stand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479846606281-92n7qs6hprlgeg7qprfsu19usntsg8di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbqj8YrqKBlTgHKraqUI38TpLaSgmT5OM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479846606281-92n7qs6hprlgeg7qprfsu19usntsg8di.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
