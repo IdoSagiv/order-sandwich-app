@@ -10,7 +10,6 @@
         android:layout_height="100dp"
         android:background="@drawable/orange_bg_rounded_corner"
         android:gravity="center"
-        android:paddingTop="16dp"
         android:text="@string/new_order_screen_title"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

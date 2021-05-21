@@ -10,7 +10,6 @@
         android:layout_height="100dp"
         android:background="@drawable/orange_bg_rounded_corner"
         android:gravity="center"
-        android:paddingTop="16dp"
         android:text="@string/edit_order_screen_title"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,9 +130,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutOrderDetailsInEditOrder"
         android:layout_marginTop="40dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutOrderDetailsInEditOrder">
         <!-- save changes    -->
         <Button
             android:id="@+id/buttonSaveOrderInEditOrder"
@@ -157,7 +156,6 @@
             app:layout_constraintEnd_toEndOf="@id/buttonSaveOrderInEditOrder"
             app:layout_constraintStart_toStartOf="@id/buttonSaveOrderInEditOrder" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

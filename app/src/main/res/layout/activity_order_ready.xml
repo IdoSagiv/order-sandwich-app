@@ -5,11 +5,12 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/orange_bg_rounded_corner"
+        android:gravity="center"
         android:text="Order is ready!!"
-        android:textSize="48sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
