@@ -15,6 +15,7 @@ public class LocalDb {
     private static final String ORDERS_COLLECTION = "orders";
     private static final String SP_DB = "sandwich_stand_local_db";
     private static final String SP_CURRENT_ORDER = "current_order_id";
+    private static final String SP_CUSTOMER_NAME = "customer_name";
     private final SharedPreferences sp;
     private final FirebaseFirestore db;
 
@@ -34,7 +35,7 @@ public class LocalDb {
             // update local data base
             currentOrder = value.toObject(SandwichOrder.class);
             currentOrderMutableLD.setValue(currentOrder);
-            updateSp(currentOrder.getId());
+            updateCurrentOrderInSp(currentOrder.getId());
         }
     };
 
@@ -66,6 +67,7 @@ public class LocalDb {
     public void addOrder(SandwichOrder newOrder) {
         db.collection(ORDERS_COLLECTION).document(newOrder.getId()).set(newOrder);
         currListener = db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).addSnapshotListener(orderChangedEventListener);
+        updateCustomerNameInSp(newOrder.getCustomerName());
     }
 
     public void deleteCurrentOrder() {
@@ -75,9 +77,10 @@ public class LocalDb {
         db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).delete();
     }
 
-    public void UpdateCurrentOrder(SandwichOrder newOrder) {
+    public void updateCurrentOrder(SandwichOrder newOrder) {
         if (currentOrder == null || !newOrder.getId().equals(currentOrder.getId())) return;
         db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).set(newOrder);
+        updateCustomerNameInSp(newOrder.getCustomerName());
         // todo: stop listening for done orders?
 //        if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE && currListener != null)
 //            currListener.remove();
@@ -91,13 +94,23 @@ public class LocalDb {
         return currentOrderLD;
     }
 
+    public String getCustomerName() {
+        return sp.getString(SP_CUSTOMER_NAME, "");
+    }
+
     private void deleteLocalCurrentOrder() {
         currentOrder = null;
-        updateSp(null);
+        updateCurrentOrderInSp(null);
         currentOrderMutableLD.setValue(currentOrder);
     }
 
-    private void updateSp(@Nullable String newOrderId) {
+    private void updateCustomerNameInSp(String name) {
+        SharedPreferences.Editor spEditor = sp.edit();
+        spEditor.putString(SP_CUSTOMER_NAME, name);
+        spEditor.apply();
+    }
+
+    private void updateCurrentOrderInSp(@Nullable String newOrderId) {
         SharedPreferences.Editor spEditor = sp.edit();
         spEditor.putString(SP_CURRENT_ORDER, newOrderId);
         spEditor.apply();

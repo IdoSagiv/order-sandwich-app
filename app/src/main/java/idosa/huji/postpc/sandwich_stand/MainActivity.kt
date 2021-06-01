@@ -9,10 +9,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         when (SandwichStandApp.getLocalDb().currentOrder?.status) {
             null -> {
-                startActivity(Intent(this, NewOrderActivity::class.java))
+                val intent = Intent(this, PlaceOrderActivity::class.java)
+                intent.putExtra("is_edit_mode", false)
+                startActivity(intent)
             }
             SandwichOrder.OrderStatus.WAITING -> {
-                startActivity(Intent(this, EditOrderActivity::class.java))
+                val intent = Intent(this, PlaceOrderActivity::class.java)
+                intent.putExtra("is_edit_mode", true)
+                startActivity(intent)
             }
             SandwichOrder.OrderStatus.IN_PROGRESS -> {
                 startActivity(Intent(this, WaitForOrderActivity::class.java))
@@ -22,7 +26,9 @@ class MainActivity : AppCompatActivity() {
             }
             else -> {
                 // todo: verify tis is what should be done
-                startActivity(Intent(this, NewOrderActivity::class.java))
+                val intent = Intent(this, PlaceOrderActivity::class.java)
+                intent.putExtra("is_edit_mode", false)
+                startActivity(intent)
             }
         }
     }

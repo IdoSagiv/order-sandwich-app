@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">sandwich stand</string>
-    <string name="new_order_screen_title">New order</string>
-    <string name="edit_order_screen_title">Edit order</string>
+    <string name="new_order_title">Place order</string>
+    <string name="edit_order_title">Edit order</string>
 </resources>
