@@ -46,6 +46,9 @@ public class LocalDb {
 
         if (currentOrderId != null) {
             downloadOrder(currentOrderId);
+        } else {
+            currentOrder = null;
+            currentOrderMutableLD.setValue(null);
         }
     }
 
@@ -66,7 +69,7 @@ public class LocalDb {
 
     public void addOrder(SandwichOrder newOrder) {
         db.collection(ORDERS_COLLECTION).document(newOrder.getId()).set(newOrder);
-        currListener = db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).addSnapshotListener(orderChangedEventListener);
+        currListener = db.collection(ORDERS_COLLECTION).document(newOrder.getId()).addSnapshotListener(orderChangedEventListener);
         updateCustomerNameInSp(newOrder.getCustomerName());
     }
 

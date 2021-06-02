@@ -9,10 +9,35 @@ data class SandwichOrder(
     var isTahini: Boolean,
     var comments: String
 ) {
-    enum class OrderStatus {
-        WAITING, IN_PROGRESS, READY, DONE
-    }
+    // empty constructor for FireStore
+    constructor() : this("", 0, false, false, "")
 
     var id: String = UUID.randomUUID().toString()
-    var status: OrderStatus = OrderStatus.WAITING
+
+    private var status: String = OrderStatus.WAITING.asString
+
+    enum class OrderStatus(var asString: String) {
+
+        WAITING("waiting"), IN_PROGRESS("in_progress"), READY("ready"), DONE("done");
+
+        override fun toString(): String {
+            return asString;
+        }
+
+        companion object {
+            fun parse(asString: String): OrderStatus? {
+                return when (asString.lowercase()) {
+                    WAITING.asString -> WAITING
+                    IN_PROGRESS.asString -> IN_PROGRESS
+                    READY.asString -> READY
+                    DONE.asString -> DONE
+                    else -> null
+                }
+            }
+        }
+    }
+
+    fun getStatus(): OrderStatus? {
+        return OrderStatus.parse(status)
+    }
 }

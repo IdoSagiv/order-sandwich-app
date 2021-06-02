@@ -7,7 +7,8 @@ import android.os.Bundle
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        when (SandwichStandApp.getLocalDb().currentOrder?.status) {
+        // todo: live data on the current order, while waiting show progressbar
+        when (SandwichStandApp.getLocalDb().currentOrder?.getStatus()) {
             null -> {
                 val intent = Intent(this, PlaceOrderActivity::class.java)
                 intent.putExtra("is_edit_mode", false)

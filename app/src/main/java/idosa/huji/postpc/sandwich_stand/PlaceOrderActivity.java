@@ -1,5 +1,6 @@
 package idosa.huji.postpc.sandwich_stand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Editable;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.google.android.material.slider.Slider;
 
@@ -31,15 +34,29 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     private LocalDb db;
 
+    private LiveData<SandwichOrder> orderLiveData;
+    private SandwichOrder currentOrder;
+
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
 
-        setScreenMode(getIntent().getBooleanExtra("is_edit_mode", false));
-
         db = SandwichStandApp.getLocalDb();
+        orderLiveData = db.getCurrentOrderLD();
+        orderLiveData.observe(this,
+                sandwichOrder -> {
+                    currentOrder = sandwichOrder;
+                    if (currentOrder == null) {
+                        setScreenMode(false);
+                    } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
+                        setScreenMode(true);
+                    } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
+                        Toast.makeText(this, "stattus changed to in progress", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, WaitForOrderActivity.class));
+                    }
+                });
 
         customerNameEditText = findViewById(R.id.editTextCustomerName);
         numPicklesSlider = findViewById(R.id.sliderNumOfPickles);
@@ -50,6 +67,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         saveOrderChangesBtn = findViewById(R.id.buttonSaveOrderChanges);
         deleteOrderBtn = findViewById(R.id.buttonDeleteOrder);
 
+        setScreenMode(getIntent().getBooleanExtra("is_edit_mode", false));
         customerNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,7 +97,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     isTahiniCheckBox.isChecked(),
                     orderCommentsEditText.getText().toString());
             db.addOrder(newOrder);
-            setScreenMode(true);
         });
 
         saveOrderChangesBtn.setOnClickListener(v -> {
