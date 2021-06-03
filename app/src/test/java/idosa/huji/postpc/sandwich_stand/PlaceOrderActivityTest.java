@@ -162,6 +162,6 @@ public class PlaceOrderActivityTest {
         Assert.assertEquals(isHummus, passedOrder.isHummus());
         Assert.assertEquals(isTahini, passedOrder.isTahini());
         Assert.assertEquals(comments, passedOrder.getComments());
-        Assert.assertEquals(SandwichOrder.OrderStatus.WAITING, passedOrder.getOrderStatus());
+        Assert.assertEquals(SandwichOrder.OrderStatus.WAITING, passedOrder.getStatus());
     }
 }

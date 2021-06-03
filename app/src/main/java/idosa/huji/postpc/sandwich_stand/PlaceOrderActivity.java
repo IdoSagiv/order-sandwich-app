@@ -52,9 +52,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
             if (sandwichOrder == null) {
                 return;
             }
-            if (sandwichOrder.getOrderStatus() == SandwichOrder.OrderStatus.WAITING) {
+            if (sandwichOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
                 setScreenMode(true);
-            } else if (sandwichOrder.getOrderStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
+            } else if (sandwichOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
                 startActivity(new Intent(this, WaitForOrderActivity.class));
                 orderLiveData.removeObservers(this);
                 finish();

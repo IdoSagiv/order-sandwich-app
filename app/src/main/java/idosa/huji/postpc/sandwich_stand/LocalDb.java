@@ -84,7 +84,7 @@ public class LocalDb {
         fireStore.collection(ORDERS_COLLECTION).document(currentOrder.getId()).set(newOrder);
         updateCustomerNameInSp(newOrder.getCustomerName());
 
-        if (newOrder.getOrderStatus() == SandwichOrder.OrderStatus.DONE) {
+        if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE) {
             if (currListener != null) currListener.remove();
             currentOrder = null;
             currentOrderMutableLD.setValue(null);
