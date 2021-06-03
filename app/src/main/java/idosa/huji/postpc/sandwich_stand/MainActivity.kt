@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     // in tests can inject value
-    lateinit var db: LocalDb
+    var db: LocalDb?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
             db = SandwichStandApp.getLocalDb()
         }
 
-        val orderLiveData = db.currentOrderLD
-        orderLiveData.observe(this, { sandwichOrder: SandwichOrder? ->
+        val orderLiveData = db?.currentOrderLD
+        orderLiveData?.observe(this, { sandwichOrder: SandwichOrder? ->
             when (sandwichOrder?.getStatus()) {
                 null -> {
                     val intent = Intent(this, PlaceOrderActivity::class.java)

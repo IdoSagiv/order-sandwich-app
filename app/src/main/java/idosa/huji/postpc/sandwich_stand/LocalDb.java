@@ -17,7 +17,7 @@ public class LocalDb {
     private static final String SP_CURRENT_ORDER = "current_order_id";
     private static final String SP_CUSTOMER_NAME = "customer_name";
     private final SharedPreferences sp;
-    private final FirebaseFirestore db;
+    private final FirebaseFirestore fireStore;
 
     private SandwichOrder currentOrder = null;
     private final MutableLiveData<SandwichOrder> currentOrderMutableLD = new MutableLiveData<>();
@@ -27,7 +27,7 @@ public class LocalDb {
 
     private final com.google.firebase.firestore.EventListener<DocumentSnapshot> orderChangedEventListener = (value, error) -> {
         if (error != null) {
-            //error todo: do something
+            //error todo: do something?
         } else if (value == null || !value.exists()) {
             //order deleted
             deleteLocalCurrentOrder();
@@ -41,7 +41,7 @@ public class LocalDb {
 
     public LocalDb(Context context) {
         this.sp = context.getSharedPreferences(SP_DB, Context.MODE_PRIVATE);
-        this.db = FirebaseFirestore.getInstance();
+        this.fireStore = FirebaseFirestore.getInstance();
         String currentOrderId = sp.getString(SP_CURRENT_ORDER, null);
 
         if (currentOrderId != null) {
@@ -53,38 +53,37 @@ public class LocalDb {
     }
 
     private void downloadOrder(String orderId) {
-        db.collection(ORDERS_COLLECTION).document(orderId).get().addOnSuccessListener(documentSnapshot -> {
+        fireStore.collection(ORDERS_COLLECTION).document(orderId).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 // update locally
                 currentOrder = documentSnapshot.toObject(SandwichOrder.class);
                 currentOrderMutableLD.setValue(currentOrder);
                 // set updates listener
-                currListener = db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).addSnapshotListener(orderChangedEventListener);
+                currListener = fireStore.collection(ORDERS_COLLECTION).document(currentOrder.getId()).addSnapshotListener(orderChangedEventListener);
             } else {
-                // todo: local or also from db?
+                // todo: only local or also from fireStore?
                 deleteLocalCurrentOrder();
             }
         });
     }
 
     public void addOrder(SandwichOrder newOrder) {
-        db.collection(ORDERS_COLLECTION).document(newOrder.getId()).set(newOrder);
-        currListener = db.collection(ORDERS_COLLECTION).document(newOrder.getId()).addSnapshotListener(orderChangedEventListener);
+        fireStore.collection(ORDERS_COLLECTION).document(newOrder.getId()).set(newOrder);
+        currListener = fireStore.collection(ORDERS_COLLECTION).document(newOrder.getId()).addSnapshotListener(orderChangedEventListener);
         updateCustomerNameInSp(newOrder.getCustomerName());
     }
 
     public void deleteCurrentOrder() {
         if (currentOrder == null) return;
-        // todo: remove listener
         if (currListener != null) currListener.remove();
-        db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).delete();
+        fireStore.collection(ORDERS_COLLECTION).document(currentOrder.getId()).delete();
     }
 
     public void updateCurrentOrder(SandwichOrder newOrder) {
         if (currentOrder == null || !newOrder.getId().equals(currentOrder.getId())) return;
-        db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).set(newOrder);
+        fireStore.collection(ORDERS_COLLECTION).document(currentOrder.getId()).set(newOrder);
         updateCustomerNameInSp(newOrder.getCustomerName());
-        // todo: stop listening for done orders?
+
         if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE) {
             if (currListener != null) currListener.remove();
             currentOrder = null;

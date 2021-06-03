@@ -11,7 +11,6 @@ public class SandwichStandApp extends Application {
         super.onCreate();
         instance = this;
         localDb = new LocalDb(this);
-        // todo: lunch local and remote DBs
     }
 
     public SandwichStandApp getInstance() {
