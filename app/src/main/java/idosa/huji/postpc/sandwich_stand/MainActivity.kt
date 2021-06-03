@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val orderLiveData = db?.currentOrderLD
         orderLiveData?.observe(this, { sandwichOrder: SandwichOrder? ->
-            when (sandwichOrder?.getStatus()) {
+            when (sandwichOrder?.getOrderStatus()) {
                 null, SandwichOrder.OrderStatus.DONE -> {
                     val intent = Intent(this,PlaceOrderActivity::class.java)
                     intent.putExtra("is_edit_mode",false)

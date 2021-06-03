@@ -37,7 +37,7 @@ open class SandwichOrder(
         }
     }
 
-    fun getStatus(): OrderStatus? {
+    fun getOrderStatus(): OrderStatus? {
         return OrderStatus.parse(status)
     }
 
