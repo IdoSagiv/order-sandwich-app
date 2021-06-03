@@ -131,27 +131,23 @@ public class PlaceOrderActivity extends AppCompatActivity {
             saveOrderChangesBtn.setVisibility(View.VISIBLE);
             deleteOrderBtn.setVisibility(View.VISIBLE);
 
-            if (currentOrder == null) {
-                SandwichOrder order = db.getCurrentOrder();
-                customerNameEditText.setText(order.getCustomerName());
-                numPicklesSlider.setValue(order.getNumPickles());
-                isHummusCheckBox.setChecked(order.isHummus());
-                isTahiniCheckBox.setChecked(order.isTahini());
-                orderCommentsEditText.setText(order.getComments());
-            }
+            SandwichOrder order = db.getCurrentOrder();
+            customerNameEditText.setText(order.getCustomerName());
+            numPicklesSlider.setValue(order.getNumPickles());
+            isHummusCheckBox.setChecked(order.isHummus());
+            isTahiniCheckBox.setChecked(order.isTahini());
+            orderCommentsEditText.setText(order.getComments());
         } else {
             screenTitle.setText(R.string.new_order_title);
             saveOrderChangesBtn.setVisibility(View.GONE);
             deleteOrderBtn.setVisibility(View.GONE);
             placeOrderBtn.setVisibility(View.VISIBLE);
 
-            if (currentOrder != null) {
-                customerNameEditText.setText(db.getCustomerName());
-                numPicklesSlider.setValue(0);
-                isHummusCheckBox.setChecked(false);
-                isTahiniCheckBox.setChecked(false);
-                orderCommentsEditText.setText("");
-            }
+            customerNameEditText.setText(db.getCustomerName());
+            numPicklesSlider.setValue(0);
+            isHummusCheckBox.setChecked(false);
+            isTahiniCheckBox.setChecked(false);
+            orderCommentsEditText.setText("");
         }
     }
 
