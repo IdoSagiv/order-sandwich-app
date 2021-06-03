@@ -1,5 +1,5 @@
 # Sandwich Stand App
-An android app for a small Sandwich Stand.
+An android app for a small Sandwich Stand.</br>
 This app was written as part of PostPc (Android) course of The Hebrew University of Jerusalem.
 
 ## Technologies and tools
