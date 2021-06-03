@@ -68,6 +68,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         // todo: load right in the beginning, or wait for update???
         setScreenMode(getIntent().getBooleanExtra("is_edit_mode", false));
+
         customerNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -144,11 +145,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
             deleteOrderBtn.setVisibility(View.GONE);
             placeOrderBtn.setVisibility(View.VISIBLE);
 
-            customerNameEditText.setText(db.getCustomerName());
-            numPicklesSlider.setValue(0);
-            isHummusCheckBox.setChecked(false);
-            isTahiniCheckBox.setChecked(false);
-            orderCommentsEditText.setText("");
+            if (currentOrder != null) {
+                customerNameEditText.setText(db.getCustomerName());
+                numPicklesSlider.setValue(0);
+                isHummusCheckBox.setChecked(false);
+                isTahiniCheckBox.setChecked(false);
+                orderCommentsEditText.setText("");
+            }
         }
     }
 
