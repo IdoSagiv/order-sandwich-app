@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, OrderReadyActivity::class.java))
                 }
                 else -> {
-                    // todo: verify tis is what should be done
                     val intent = Intent(this, PlaceOrderActivity::class.java)
                     intent.putExtra("is_edit_mode", false)
                     startActivity(intent)
