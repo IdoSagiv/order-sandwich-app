@@ -23,6 +23,9 @@ import com.google.android.material.slider.Slider;
 import org.jetbrains.annotations.NotNull;
 
 public class PlaceOrderActivity extends AppCompatActivity {
+    // in tests can inject value
+    public LocalDb db = null;
+
     private EditText customerNameEditText;
     private Slider numPicklesSlider;
     private CheckBox isHummusCheckBox;
@@ -32,8 +35,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private Button saveOrderChangesBtn;
     private Button deleteOrderBtn;
 
-    private LocalDb db;
-
     private SandwichOrder currentOrder = null;
 
 
@@ -42,7 +43,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
 
-        db = SandwichStandApp.getLocalDb();
+        if (db == null) {
+            db = SandwichStandApp.getLocalDb();
+        }
+
         LiveData<SandwichOrder> orderLiveData = db.getCurrentOrderLD();
         orderLiveData.observe(this, sandwichOrder -> {
             currentOrder = sandwichOrder;

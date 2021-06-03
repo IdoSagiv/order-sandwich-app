@@ -10,11 +10,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class OrderReadyActivity extends AppCompatActivity {
+    // in tests can inject value
+    public LocalDb db = null;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_ready);
-        LocalDb db = SandwichStandApp.getLocalDb();
+
+        if (db == null) {
+            db = SandwichStandApp.getLocalDb();
+        }
+
         Button finishOrderBtn = findViewById(R.id.buttonFinishOrder);
         finishOrderBtn.setOnClickListener(v -> {
             SandwichOrder order = db.getCurrentOrder();

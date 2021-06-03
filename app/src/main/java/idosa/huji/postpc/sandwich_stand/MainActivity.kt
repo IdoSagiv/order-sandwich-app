@@ -5,10 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    // in tests can inject value
+    lateinit var db: LocalDb
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
-        val orderLiveData = SandwichStandApp.getLocalDb().currentOrderLD
+
+        if (db == null) {
+            db = SandwichStandApp.getLocalDb()
+        }
+
+        val orderLiveData = db.currentOrderLD
         orderLiveData.observe(this, { sandwichOrder: SandwichOrder? ->
             when (sandwichOrder?.getStatus()) {
                 null -> {
