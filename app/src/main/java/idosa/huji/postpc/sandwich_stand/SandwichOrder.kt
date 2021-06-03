@@ -2,7 +2,7 @@ package idosa.huji.postpc.sandwich_stand
 
 import java.util.*
 
-data class SandwichOrder(
+open class SandwichOrder(
     var customerName: String,
     var numPickles: Int,
     var isHummus: Boolean,
