@@ -30,10 +30,7 @@ public class OrderReadyActivity extends AppCompatActivity {
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE: {
-                    Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent1.putExtra("LOGOUT", true);
-                    startActivity(intent1);
+                    super.onBackPressed();
                     break;
                 }
                 case DialogInterface.BUTTON_NEGATIVE:
@@ -45,4 +42,5 @@ public class OrderReadyActivity extends AppCompatActivity {
         builder.setMessage("Close the app?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
+
 }
