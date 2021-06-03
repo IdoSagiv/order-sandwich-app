@@ -7,7 +7,7 @@ The app was written in Java and Kotlin, and uses FireBase-FireStore as database.
 
 ## Screens and Features
 ### New order
-In this screen the user can order a new sandwich, and edit it until the order status in being changed to 'in-progress' (by the app manager, currently manually from the DB)</br>
+In this screen the user can order a new sandwich, and edit/delete it until the order is accepted by the maneger (currently this is being done manually from the DB server)</br>
 ![place_order](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/place_order.png?raw=true)
 ![edit_order](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/edit_order.png?raw=true)
 ### Wait for order
