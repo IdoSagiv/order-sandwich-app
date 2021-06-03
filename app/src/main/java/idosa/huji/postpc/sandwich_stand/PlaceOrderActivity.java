@@ -2,7 +2,6 @@ package idosa.huji.postpc.sandwich_stand;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import com.google.android.material.slider.Slider;
 
@@ -34,8 +32,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     private LocalDb db;
 
-    private LiveData<SandwichOrder> orderLiveData;
-    private SandwichOrder currentOrder;
+    private SandwichOrder currentOrder = null;
 
 
     @Override
@@ -44,19 +41,17 @@ public class PlaceOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_order);
 
         db = SandwichStandApp.getLocalDb();
-        orderLiveData = db.getCurrentOrderLD();
-        orderLiveData.observe(this,
-                sandwichOrder -> {
-                    currentOrder = sandwichOrder;
-                    if (currentOrder == null) {
-                        setScreenMode(false);
-                    } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
-                        setScreenMode(true);
-                    } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
-                        Toast.makeText(this, "stattus changed to in progress", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, WaitForOrderActivity.class));
-                    }
-                });
+        LiveData<SandwichOrder> orderLiveData = db.getCurrentOrderLD();
+        orderLiveData.observe(this, sandwichOrder -> {
+            currentOrder = sandwichOrder;
+            if (currentOrder == null) {
+                setScreenMode(false);
+            } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
+                setScreenMode(true);
+            } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
+                startActivity(new Intent(this, WaitForOrderActivity.class));
+            }
+        });
 
         customerNameEditText = findViewById(R.id.editTextCustomerName);
         numPicklesSlider = findViewById(R.id.sliderNumOfPickles);
@@ -67,6 +62,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         saveOrderChangesBtn = findViewById(R.id.buttonSaveOrderChanges);
         deleteOrderBtn = findViewById(R.id.buttonDeleteOrder);
 
+        // todo: load right in the beginning, or wait for update???
         setScreenMode(getIntent().getBooleanExtra("is_edit_mode", false));
         customerNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -130,12 +126,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
             saveOrderChangesBtn.setVisibility(View.VISIBLE);
             deleteOrderBtn.setVisibility(View.VISIBLE);
 
-            SandwichOrder order = db.getCurrentOrder();
-            customerNameEditText.setText(order.getCustomerName());
-            numPicklesSlider.setValue(order.getNumPickles());
-            isHummusCheckBox.setChecked(order.isHummus());
-            isTahiniCheckBox.setChecked(order.isTahini());
-            orderCommentsEditText.setText(order.getComments());
+            if (currentOrder == null) {
+                SandwichOrder order = db.getCurrentOrder();
+                customerNameEditText.setText(order.getCustomerName());
+                numPicklesSlider.setValue(order.getNumPickles());
+                isHummusCheckBox.setChecked(order.isHummus());
+                isTahiniCheckBox.setChecked(order.isTahini());
+                orderCommentsEditText.setText(order.getComments());
+            }
         } else {
             screenTitle.setText(R.string.new_order_title);
             saveOrderChangesBtn.setVisibility(View.GONE);

@@ -85,8 +85,13 @@ public class LocalDb {
         db.collection(ORDERS_COLLECTION).document(currentOrder.getId()).set(newOrder);
         updateCustomerNameInSp(newOrder.getCustomerName());
         // todo: stop listening for done orders?
-//        if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE && currListener != null)
-//            currListener.remove();
+        if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE) {
+            if (currListener != null) currListener.remove();
+            currentOrder = null;
+            currentOrderMutableLD.setValue(currentOrder);
+            updateCurrentOrderInSp(null);
+
+        }
     }
 
     public SandwichOrder getCurrentOrder() {
