@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class OrderReadyActivity extends AppCompatActivity {
     // in tests can inject value
+    @VisibleForTesting
     public LocalDb db = null;
 
     @Override

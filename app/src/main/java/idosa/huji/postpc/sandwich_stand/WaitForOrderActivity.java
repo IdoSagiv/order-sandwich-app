@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -13,6 +14,7 @@ import androidx.lifecycle.LiveData;
 public class WaitForOrderActivity extends AppCompatActivity {
 
     // in tests can inject value
+    @VisibleForTesting
     public LocalDb db = null;
 
     @Override
