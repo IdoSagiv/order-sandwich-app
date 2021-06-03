@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_oil_and_garlic">
 
     <TextView
         android:id="@+id/textViewPlaceOrderScreenTitle"
@@ -12,6 +13,7 @@
         android:background="@drawable/orange_bg_rounded_corner"
         android:gravity="center"
         android:text="@string/new_order_title"
+        android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <EditText
@@ -51,6 +54,8 @@
                 android:layout_height="wrap_content"
                 android:hint="your name"
                 android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="#BCB3B3"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -67,6 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pickles"
+
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <com.google.android.material.slider.Slider
@@ -85,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Hummus"
-            android:textColor="#8A8A8A"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <!-- is tahini   -->
@@ -95,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Tahini"
-            android:textColor="#8A8A8A"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <!-- Order comment   -->
@@ -111,6 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comments"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <EditText
@@ -119,6 +127,8 @@
                 android:layout_height="wrap_content"
                 android:hint="add comments"
                 android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="#BCB3B3"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -137,6 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:backgroundTint="#918B8B"
             android:gravity="center"
             android:text="PLACE ORDER"
             android:textSize="18sp" />
@@ -147,6 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:backgroundTint="#918B8B"
             android:text="Save changes"
             android:textSize="18sp"
             tools:visibility="gone" />
@@ -158,6 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:backgroundTint="#918B8B"
             android:text="Delete order"
             android:textSize="18sp"
             tools:visibility="gone" />
