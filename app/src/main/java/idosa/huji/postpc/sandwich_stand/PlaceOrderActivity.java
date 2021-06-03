@@ -37,8 +37,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private Button saveOrderChangesBtn;
     private Button deleteOrderBtn;
 
-    private SandwichOrder currentOrder = null;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,12 +49,12 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         LiveData<SandwichOrder> orderLiveData = db.getCurrentOrderLD();
         orderLiveData.observe(this, sandwichOrder -> {
-            currentOrder = sandwichOrder;
-            if (currentOrder == null) {
-                setScreenMode(false);
-            } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
+            if (sandwichOrder == null) {
+                return;
+            }
+            if (sandwichOrder.getStatus() == SandwichOrder.OrderStatus.WAITING) {
                 setScreenMode(true);
-            } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
+            } else if (sandwichOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
                 startActivity(new Intent(this, WaitForOrderActivity.class));
                 orderLiveData.removeObservers(this);
                 finish();
@@ -72,7 +70,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
         saveOrderChangesBtn = findViewById(R.id.buttonSaveOrderChanges);
         deleteOrderBtn = findViewById(R.id.buttonDeleteOrder);
 
-        // todo: load right in the beginning, or wait for update???
         setScreenMode(getIntent().getBooleanExtra("is_edit_mode", false));
 
         customerNameEditText.addTextChangedListener(new TextWatcher() {

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     // in tests can inject value
-    var db: LocalDb?=null
+    var db: LocalDb? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         val orderLiveData = db?.currentOrderLD
         orderLiveData?.observe(this, { sandwichOrder: SandwichOrder? ->
             when (sandwichOrder?.getStatus()) {
-                null -> {
-                    val intent = Intent(this, PlaceOrderActivity::class.java)
-                    intent.putExtra("is_edit_mode", false)
+                null, SandwichOrder.OrderStatus.DONE -> {
+                    val intent = Intent(this,PlaceOrderActivity::class.java)
+                    intent.putExtra("is_edit_mode",false)
                     startActivity(intent)
                 }
-                SandwichOrder.OrderStatus.WAITING -> {
-                    val intent = Intent(this, PlaceOrderActivity::class.java)
-                    intent.putExtra("is_edit_mode", true)
+                SandwichOrder.OrderStatus.WAITING->{
+                    val intent = Intent(this,PlaceOrderActivity::class.java)
+                    intent.putExtra("is_edit_mode",true)
                     startActivity(intent)
                 }
                 SandwichOrder.OrderStatus.IN_PROGRESS -> {
@@ -34,11 +34,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 SandwichOrder.OrderStatus.READY -> {
                     startActivity(Intent(this, OrderReadyActivity::class.java))
-                }
-                else -> {
-                    val intent = Intent(this, PlaceOrderActivity::class.java)
-                    intent.putExtra("is_edit_mode", false)
-                    startActivity(intent)
                 }
             }
             orderLiveData.removeObservers(this)
