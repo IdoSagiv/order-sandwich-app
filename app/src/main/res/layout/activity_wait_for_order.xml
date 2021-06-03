@@ -22,8 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text="put here some explain on the order's status"
-        android:textSize="18sp"
+        android:text="We are making your magnificent\nsandwich right now!!\nPrepare yourself to a once in\na lifetime experience!"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOrderInProgressTitle" />
 
