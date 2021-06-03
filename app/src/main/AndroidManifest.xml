@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sandwich_stand">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +20,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PlaceOrderActivity" />
-        <activity android:name=".WaitForOrderActivity" />
-        <activity android:name=".OrderReadyActivity" />
+        <activity
+            android:name=".PlaceOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WaitForOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OrderReadyActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
