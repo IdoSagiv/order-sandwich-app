@@ -11,7 +11,7 @@ In this screen the user can order a new sandwich, and edit it until the order st
 ![edit_order](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/edit_order.png?raw=true)
 ### Wait for order
 While the order is being made, the user is in this screen</br>
-![order_in_progress](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/in_progress.png?raw=true)
+![order_in_progress](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/in_progress.gif?raw=true)
 ### Order is ready
 When the order is ready, the user will see this screen and click on the button when collecting the order.</br>
 ![order_ready](https://github.com/IdoSagiv/order-sandwich-app/blob/main/screenshots/ready.png?raw=true)
