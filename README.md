@@ -1,5 +1,6 @@
 # Sandwich Stand App
 An android app for a small Sandwich Stand.
+This app was written as part of PostPc (Android) course of The Hebrew University of Jerusalem.
 
 ## Technologies and tools
 The app was written in Java and Kotlin, and uses FireBase-FireStore as database.
