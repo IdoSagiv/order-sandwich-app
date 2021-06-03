@@ -23,6 +23,8 @@ public class WaitForOrderActivity extends AppCompatActivity {
                         // todo: do something??
                     } else if (sandwichOrder.getStatus() == SandwichOrder.OrderStatus.READY) {
                         startActivity(new Intent(this, OrderReadyActivity.class));
+                        orderLiveData.removeObservers(this);
+                        finish();
                     }
                 });
     }

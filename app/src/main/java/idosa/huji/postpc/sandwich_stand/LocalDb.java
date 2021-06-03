@@ -27,7 +27,7 @@ public class LocalDb {
 
     private final com.google.firebase.firestore.EventListener<DocumentSnapshot> orderChangedEventListener = (value, error) -> {
         if (error != null) {
-            //error
+            //error todo: do something
         } else if (value == null || !value.exists()) {
             //order deleted
             deleteLocalCurrentOrder();
@@ -88,9 +88,8 @@ public class LocalDb {
         if (newOrder.getStatus() == SandwichOrder.OrderStatus.DONE) {
             if (currListener != null) currListener.remove();
             currentOrder = null;
-            currentOrderMutableLD.setValue(currentOrder);
+            currentOrderMutableLD.setValue(null);
             updateCurrentOrderInSp(null);
-
         }
     }
 

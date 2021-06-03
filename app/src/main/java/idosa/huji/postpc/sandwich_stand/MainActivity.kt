@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+            orderLiveData.removeObservers(this)
+            finish()
         })
     }
 }

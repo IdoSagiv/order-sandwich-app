@@ -50,6 +50,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                 setScreenMode(true);
             } else if (currentOrder.getStatus() == SandwichOrder.OrderStatus.IN_PROGRESS) {
                 startActivity(new Intent(this, WaitForOrderActivity.class));
+                orderLiveData.removeObservers(this);
+                finish();
             }
         });
 

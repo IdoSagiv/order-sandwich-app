@@ -40,4 +40,8 @@ data class SandwichOrder(
     fun getStatus(): OrderStatus? {
         return OrderStatus.parse(status)
     }
+
+    fun changeStatus(newStatus: OrderStatus) {
+        this.status = newStatus.asString
+    }
 }
